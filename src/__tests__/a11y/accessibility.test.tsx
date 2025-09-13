@@ -5,6 +5,13 @@ import HomePage from '@/app/page';
 // Extend Jest matchers
 expect.extend(toHaveNoViolations);
 
+// Mock the useTheme hook
+jest.mock('@/hooks/use-theme', () => ({
+  useTheme: () => ({
+    resolvedTheme: 'light',
+  }),
+}));
+
 describe('Accessibility Tests', () => {
   it('should not have accessibility violations on homepage', async () => {
     const { container } = render(<HomePage />);
