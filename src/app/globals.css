@@ -113,10 +113,20 @@ p {
   background-color: #dc5dfc;
 }
 
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
 .card-list-top-ten-account::-webkit-scrollbar {
-  /* width: 24px; ширина для вертикального скролла */
   height: 3px;
-  /* высота для горизонтального скролла */
   opacity: 0;
   background-color: #1b1b1b;
 }

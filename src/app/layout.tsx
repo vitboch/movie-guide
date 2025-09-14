@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import './globals.css';
+import { AuthProvider } from '../context/AuthProvider';
 
 export const metadata: Metadata = {
   title: 'Movie Guide',
@@ -13,7 +14,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang='en'>
-      <body className='font-play'>{children}</body>
+      <body className='font-play'>
+        <AuthProvider>{children}</AuthProvider>
+      </body>
     </html>
   );
 }
