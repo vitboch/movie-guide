@@ -9,10 +9,38 @@ export interface IconProps {
   'aria-label'?: string;
 }
 
+export interface RatingProps {
+  value: number;
+  size?: 'small' | 'large';
+  className?: string;
+  'aria-label'?: string;
+}
+
 const iconSizes = {
   small: 'w-4 h-4',
   medium: 'w-6 h-6',
   large: 'w-8 h-8',
+};
+
+// Rating component colors and styles
+const getRatingColor = (value: number): string => {
+  if (value >= 8) return 'bg-[#A59400]'; // Excellent - золотой
+  if (value >= 7) return 'bg-[#308E21]'; // Good - зеленый
+  if (value >= 6) return 'bg-[#777777]'; // Poor - серый
+  return 'bg-[#C82020]'; // Bullshit - красный
+};
+
+const ratingSizes = {
+  small: {
+    container: 'px-2 py-1',
+    icon: 'w-2.5 h-2.5',
+    text: 'text-xs font-bold',
+  },
+  large: {
+    container: 'px-3 py-1',
+    icon: 'w-4 h-4',
+    text: 'text-lg font-bold',
+  },
 };
 
 export const Icon: React.FC<IconProps> = ({
@@ -98,5 +126,34 @@ export const LogoIcon: React.FC<Omit<IconProps, 'name'>> = props => {
       name={resolvedTheme === 'dark' ? 'logo-dark' : 'logo-light'}
       {...props}
     />
+  );
+};
+
+export const Rating: React.FC<RatingProps> = ({
+  value,
+  size = 'large',
+  className = '',
+  'aria-label': ariaLabel,
+}) => {
+  const sizeConfig = ratingSizes[size];
+  const colorClass = getRatingColor(value);
+  const formattedValue = value.toFixed(1);
+
+  return (
+    <div
+      className={`inline-flex items-center gap-1 rounded-2xl ${colorClass} ${sizeConfig.container} ${className}`}
+      aria-label={ariaLabel || `Rating: ${formattedValue}`}
+      role='img'
+    >
+      <Image
+        src='/icons/star.svg'
+        alt=''
+        width={size === 'small' ? 10 : 16}
+        height={size === 'small' ? 10 : 16}
+        className={`${sizeConfig.icon} text-white`}
+        aria-hidden='true'
+      />
+      <span className={`${sizeConfig.text} text-white`}>{formattedValue}</span>
+    </div>
   );
 };
