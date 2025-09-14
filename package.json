@@ -16,7 +16,9 @@
     "test:coverage": "jest --coverage",
     "test:ci": "jest --ci --coverage --watchAll=false",
     "test:a11y": "jest --testPathPatterns=a11y",
-    "export": "next build"
+    "export": "next build",
+    "all-checks": "npm run lint && npm run type-check && npm run format:check && npm run test:ci && npm run test:a11y",
+    "all-fixed": "npm run lint:fix && npm run type-check && npm run format "
   },
   "dependencies": {
     "@tailwindcss/postcss": "^4.1.13",
